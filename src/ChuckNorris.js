@@ -35,7 +35,7 @@ const Chucknorris = ({title}) => {
         <Text style={{ color: 'yellow', fontWeight:'bold',fontSize: 40, marginBottom: 10}}>{title}</Text>
 
         <Image 
-        source={{ uri: 'http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG3.png',}} 
+        source={{ uri: 'http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG15.png',}} 
         style={{ width: 400, height: 400}}/>
 
         <Text style={{ width: 400, textAlign:'center',color:'yellow'}}>{jokes.value[index].joke}</Text>
