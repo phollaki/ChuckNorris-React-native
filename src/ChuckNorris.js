@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {View, Text, ActivityIndicator, Image, Button} from 'react-native'
 
 const Chucknorris = ({title}) => {
-    const [jokes,setJokes] = useState([])
+    const [jokes, setJokes] = useState([])
     const [index, setIndex] = useState(1)
 
     const load = async () => {
@@ -26,7 +26,7 @@ const Chucknorris = ({title}) => {
     }
 
     const generate = () => {
-
+        setIndex(Math.floor(Math.random()* Math.floor(573)))
     }
 
     return (
@@ -38,9 +38,10 @@ const Chucknorris = ({title}) => {
         source={{ uri: 'http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG3.png',}} 
         style={{ width: 400, height: 400}}/>
 
-        <Text style={{ color:'yellow'}}>{JSON.stringify(jokes)}</Text>
+        <Text style={{ width: 400, textAlign:'center',color:'yellow'}}>{jokes.value[index].joke}</Text>
 
-        <Button title="Generate"
+        <Button 
+        title="Give Me a Joke!"
         color='red'
         onPress={generate}/>
 
