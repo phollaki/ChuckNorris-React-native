@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {StyleSheet,View, Text, ActivityIndicator, Image, Button, FlatList} from 'react-native'
+import {TouchableHighlight,StyleSheet,View, Text, ActivityIndicator, Image, Button, FlatList} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -41,51 +41,59 @@ const Chucknorris = ({}) => {
         const filtered = favourites.filter((favourite) => favourite !== id)
         setFavourites(filtered)
     }
-
-    const renderCell = () => {
-
+    const getJokeForID = id => {
+        const joke = jokes.value.find((joke) => joke.id === id)
+        return joke.joke
     }
 
+    const getJoke = (id) => {
+        const index = jokes.value.findIndex((joke)=> joke.id === id)
+        setIndex(index)
+    }
+
+    const renderCell = ({item}) => (
+        <TouchableHighlight 
+        key={item}
+        underlayColor="grey"
+        onPress={ () => getJoke(item) }
+        style = {{
+            textAlign: 'center', 
+            padding: 20, 
+            borderTopColor: 'yellow', 
+            borderTopWidth:1,
+            justifyContent: 'center',
+            }}
+            >
+            <Text style={styles.text}>{getJokeForID(item)}</Text>
+            </TouchableHighlight>
+    )
+
     return (
-    <View style={styles.viewStyle}>
-        
+    <View style={styles.container}>
         <Image 
         source={{ uri: 'http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG15.png',}} 
         style={{ width: 300, height: 300}}
         resizeMode = 'contain'/>
 
         <Text style={styles.textStyle}>{jokes.value[index].joke}</Text>
-
-        <Text style={styles.textStyle}>{JSON.stringify(favourites)}</Text>
-        
-        
         <View style={styles.buttonStyle}>
         { favourites.includes (jokes.value[index].id) ? (
-            
-            <Ionicons name="heart-sharp" size={40} color="red" onPress={() => unfavourite (jokes.value[index].id)} />   
-
+            <Ionicons name="heart-sharp" size={40} color="red" onPress={() => unfavourite (jokes.value[index].id)} />
         ) : (
             <Ionicons name="heart-outline" size={40} color="red" onPress={() => favourite (jokes.value[index].id)}/>
-        )
-        }
+        )}
         </View>
         <Button title="Give me a Joke!" color="red" onPress={generate}/>
-
-
-        <FlatList
-        data = {favourites}
-        renderItem = {renderCell}
-        />
         
+        <FlatList 
+        style={{width: '100%'}}
+        data={favourites}
+        renderItem={renderCell}
+        />
     </View>
     )
 }
 const styles = StyleSheet.create({
-    viewStyle: {
-        flex: 1,
-        color:'yellow',
-        alignItems: 'center',
-    },
     buttonStyle: {
         flexDirection:'row',
     },
@@ -93,6 +101,16 @@ const styles = StyleSheet.create({
         color: 'yellow',
         textAlign: 'center',
         width: 400,
+    },
+    container: {
+        flex: 1,
+        backgroundColor: "black",
+        alignItems: 'center',
+        justifyContent:'center',
+        color:'yellow',
+      },
+    text:{
+        color:'yellow',
     }
 })
 export default Chucknorris
