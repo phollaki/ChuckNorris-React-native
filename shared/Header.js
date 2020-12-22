@@ -11,13 +11,13 @@ export default function Header(){
     <View style={styles.header}>
         <View style={styles.headerElements}>
             <View style={styles.icon}>
-                <Entypo name="menu" size={36} color="black" />
+                <Entypo name="menu" size={36} color="yellow" />
             </View>
             <View style={styles.title}>
                 <Text style={styles.headerText}>ChuckNorrisApp</Text>
             </View> 
             <View>
-                <AntDesign name="heart" size={36} color="black" />
+                <AntDesign name="heart" size={36} color="yellow" />
             </View>
         </View>
     </View>
@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
     header: {
       display: 'flex',
       height: 40,
-      backgroundColor: 'red',
+      backgroundColor: 'black',
+      borderBottomWidth: 1,
+      borderColor: 'yellow',
     },
     headerElements: {
         flexDirection: 'row',
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontWeight: 'bold',
-        color: 'black',
+        color: 'yellow',
         fontSize: 28,
     },
 });
