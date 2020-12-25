@@ -6,7 +6,7 @@ import Header from './shared/Header'
 
 const App = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Header/>
       <ChuckNorris/>
     </SafeAreaView>
@@ -15,7 +15,9 @@ const App = () => {
 
 
 const styles = StyleSheet.create({
-  
+  container: {
+    flex: 1,
+  }
 });
 
 

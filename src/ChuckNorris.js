@@ -76,7 +76,7 @@ const Chucknorris = ({}) => {
         resizeMode = 'contain'/>
 
         <Text style={styles.textStyle}>{jokes.value[index].joke}</Text>
-        <View style={styles.buttonStyle}>
+        <View>
         { favourites.includes (jokes.value[index].id) ? (
             <Ionicons name="heart-sharp" size={40} color="red" onPress={() => unfavourite (jokes.value[index].id)} />
         ) : (
@@ -94,15 +94,14 @@ const Chucknorris = ({}) => {
     )
 }
 const styles = StyleSheet.create({
-    buttonStyle: {
-        flexDirection:'row',
-    },
     textStyle: {
+        fontWeight: 'bold',
         color: 'yellow',
         textAlign: 'center',
-        width: 400,
+        width: 350,
     },
     container: {
+        padding: 50,
         flex: 1,
         backgroundColor: "black",
         alignItems: 'center',

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import {  View, Text, StyleSheet} from 'react-native';
 import { Entypo } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
 
@@ -27,11 +27,16 @@ export default function Header(){
 
 const styles = StyleSheet.create({
     header: {
-      display: 'flex',
-      height: 40,
-      backgroundColor: 'black',
-      borderBottomWidth: 1,
-      borderColor: 'yellow',
+        display: 'flex',
+        height: 40,
+        backgroundColor: 'black',
+        borderBottomWidth: 1,
+        borderColor: 'yellow',
+      },
+    headerText: {
+        fontWeight: 'bold',
+        color: 'yellow',
+        fontSize: 28,
     },
     headerElements: {
         flexDirection: 'row',
@@ -51,10 +56,5 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center', 
-    },
-    headerText: {
-        fontWeight: 'bold',
-        color: 'yellow',
-        fontSize: 28,
     },
 });
