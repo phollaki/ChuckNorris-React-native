@@ -28,10 +28,11 @@ export default function Header(){
 const styles = StyleSheet.create({
     header: {
         display: 'flex',
-        height: 40,
+        height: 60,
         backgroundColor: 'black',
         borderBottomWidth: 1,
         borderColor: 'yellow',
+        padding: 20,
       },
     headerText: {
         fontWeight: 'bold',
