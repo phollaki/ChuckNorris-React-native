@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import {TouchableHighlight,StyleSheet,View, Text, ActivityIndicator, Image, Button, FlatList} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import { useFavourites } from './hooks/useFavourites';
+import Favourites from './Favourites';
 
 
-const Chucknorris = ({}) => {
+const Chucknorris = ({ navigation }) => {
     const [jokes, setJokes] = useState([])
     const [index, setIndex] = useState(0)
-    const [favourites, setFavourites] = useState([])
+    const { favourites, add, remove} = useFavourites()
 
     const load = async () => {
         const response = await fetch(
@@ -33,40 +35,11 @@ const Chucknorris = ({}) => {
     }
 
     const favourite = (id) => {
-        if(!favourites.includes(id)){
-            setFavourites([...favourites, id])
-        }
+        add(id)
     }
     const unfavourite = (id) => {
-        const filtered = favourites.filter((favourite) => favourite !== id)
-        setFavourites(filtered)
+        remove(id)
     }
-    const getJokeForID = id => {
-        const joke = jokes.value.find((joke) => joke.id === id)
-        return joke.joke
-    }
-
-    const getJoke = (id) => {
-        const index = jokes.value.findIndex((joke)=> joke.id === id)
-        setIndex(index)
-    }
-
-    const renderCell = ({item}) => (
-        <TouchableHighlight 
-        key={item}
-        underlayColor="grey"
-        onPress={ () => getJoke(item) }
-        style = {{
-            textAlign: 'center', 
-            padding: 20, 
-            borderTopColor: 'yellow', 
-            borderTopWidth:1,
-            justifyContent: 'center',
-            }}
-            >
-            <Text style={styles.text}>{getJokeForID(item)}</Text>
-            </TouchableHighlight>
-    )
 
     return (
     <View style={styles.container}>
@@ -84,12 +57,8 @@ const Chucknorris = ({}) => {
         )}
         </View>
         <Button title="Give me a Joke!" color="red" onPress={generate}/>
+        <Button title="Favourites" onPress={()=> navigation.navigate('Favourites')} />
         
-        <FlatList 
-        style={{width: '100%'}}
-        data={favourites}
-        renderItem={renderCell}
-        />
     </View>
     )
 }
@@ -113,3 +82,4 @@ const styles = StyleSheet.create({
     }
 })
 export default Chucknorris
+
