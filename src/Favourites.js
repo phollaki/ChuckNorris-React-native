@@ -1,5 +1,8 @@
 import React from 'react'
+import { render } from 'react-dom'
+import { SafeAreaView } from 'react-native'
 import {FlatList, Text, TouchableHighlight} from 'react-native'
+import Swipeout from 'react-native-swipeout'
 import { useFavourites } from './hooks/useFavourites'
 import { useJokes } from './hooks/useJokes'
 
@@ -15,8 +18,9 @@ const Favourites = ({ navigation }) => {
         style = {{
             textAlign: 'center', 
             padding: 20, 
-            borderTopColor: 'yellow', 
+            borderColor: 'yellow',
             borderTopWidth:1,
+            borderBottomWidth: 1,
             justifyContent: 'center',
             }}
             >
@@ -33,15 +37,15 @@ const Favourites = ({ navigation }) => {
         const index = jokes.value.findIndex((joke)=> joke.id === id)
         setIndex(index)
     }
-
+    
+    
     return (
-    <FlatList 
-    style={{width: '100%', backgroundColor: 'black'}}
-    data={favourites}
-    renderItem={renderCell}
-    keyExtractor={(joke)=> joke}
-    />
+            <FlatList 
+            style={{width: '100%', backgroundColor: 'black'}}
+            data={favourites}
+            renderItem={renderCell}
+            keyExtractor={(item)=> item.toString()}
+            />
     )
 }
-
 export default Favourites
