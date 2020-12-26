@@ -2,25 +2,12 @@ import React, { useEffect, useState } from 'react'
 import {TouchableHighlight,StyleSheet,View, Text, ActivityIndicator, Image, Button, FlatList} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useFavourites } from './hooks/useFavourites';
-import Favourites from './Favourites';
+import { useJokes } from './hooks/useJokes';
 
 
 const Chucknorris = ({ navigation }) => {
-    const [jokes, setJokes] = useState([])
-    const [index, setIndex] = useState(0)
-    const { favourites, add, remove} = useFavourites()
-
-    const load = async () => {
-        const response = await fetch(
-            'http://api.icndb.com/jokes'
-            )
-            const data = await response.json()
-            setJokes(data)
-    }   
-
-    useEffect(() => {
-        load()
-    }, [])
+    const {favourites, add, remove} = useFavourites()
+    const {jokes, index, setIndex} = useJokes()
 
     if(jokes.length <= 0) {
         return (
@@ -29,16 +16,15 @@ const Chucknorris = ({ navigation }) => {
             </View>
         )
     }
-
-    const generate = () => {
-        setIndex(Math.floor(Math.random()* Math.floor(573)))
-    }
-
     const favourite = (id) => {
         add(id)
     }
     const unfavourite = (id) => {
         remove(id)
+    }
+    
+    const generate = () => {
+        setIndex(Math.floor(Math.random()* Math.floor(573)))
     }
 
     return (
@@ -58,10 +44,10 @@ const Chucknorris = ({ navigation }) => {
         </View>
         <Button title="Give me a Joke!" color="red" onPress={generate}/>
         <Button title="Favourites" onPress={()=> navigation.navigate('Favourites')} />
-        
     </View>
     )
 }
+
 const styles = StyleSheet.create({
     textStyle: {
         fontWeight: 'bold',

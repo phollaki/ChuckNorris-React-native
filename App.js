@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView, StyleSheet} from 'react-native';
 import Chucknorris from './src/ChuckNorris';
 import { FavouritesProvider } from './src/utils/FavouriteContext';
-import Favourites from './src/Favourites'
+import Favourites from './src/Favourites';
 import { JokeProvider } from './src/utils/JokeContext';
 
 const Stack = createStackNavigator()
@@ -21,13 +21,19 @@ const App = () => (
       <FavouritesProvider>
       <Stack.Navigator>
         <Stack.Screen 
-          name="ChuckNorrisApplication" 
+          name="ChuckNorrisScreen" 
           component={Chucknorris} 
           options={{
-            title: 'ChuckNorrisAppclication'
+            title: 'Chuck Norris Jokes'
           }}
         />
-        <Stack.Screen name="Favourites" component={Favourites} />
+        <Stack.Screen 
+        name="Favourites" 
+        component={Favourites}
+        options={{
+          title: 'My Favourite Jokes'
+        }}
+         />
       </Stack.Navigator>
       </FavouritesProvider>
       </JokeProvider>

@@ -1,9 +1,11 @@
 import React from 'react'
 import {FlatList, Text, TouchableHighlight} from 'react-native'
 import { useFavourites } from './hooks/useFavourites'
+import { useJokes } from './hooks/useJokes'
 
-const Favourites = () => {
+const Favourites = ({ navigation }) => {
     const {favourites, add, remove} = useFavourites()
+    const {jokes, setIndex} = useJokes()
 
     const renderCell = ({item}) => (
         <TouchableHighlight 
@@ -18,7 +20,7 @@ const Favourites = () => {
             justifyContent: 'center',
             }}
             >
-            <Text style={styles.text}>{getJokeForID(item)}</Text>
+            <Text style={{color:'yellow'}}>{getJokeForID(item)}</Text>
             </TouchableHighlight>
     )
     
@@ -34,9 +36,10 @@ const Favourites = () => {
 
     return (
     <FlatList 
-    style={{width: '100%'}}
+    style={{width: '100%', backgroundColor: 'black'}}
     data={favourites}
     renderItem={renderCell}
+    keyExtractor={(joke)=> joke}
     />
     )
 }
