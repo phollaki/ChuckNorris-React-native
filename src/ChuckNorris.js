@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {TouchableHighlight,StyleSheet,View, Text, ActivityIndicator, Image, Button, FlatList} from 'react-native'
+import React from 'react'
+import {StyleSheet,View, Text, ActivityIndicator, Image, Button} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useFavourites } from './hooks/useFavourites';
 import { useJokes } from './hooks/useJokes';

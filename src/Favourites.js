@@ -4,15 +4,21 @@ import Swipeout from 'react-native-swipeout'
 import { useFavourites } from './hooks/useFavourites'
 import { useJokes } from './hooks/useJokes'
 import { Feather } from '@expo/vector-icons'; 
+import { render } from 'react-dom'
+import { View } from 'native-base'
 
 
 const Favourites = ({ navigation }) => {
     const {favourites, add, remove} = useFavourites()
     const {jokes, index, setIndex} = useJokes()
-
+    
     const renderCell = ({item}) => (
         <Swipeout
-        right = {swipeoutBtns}
+       
+        right = {
+            getJoke(item),
+            swipeoutBtns
+            }
         autoClose
         backgroundColor = 'transparent'
         >
@@ -43,19 +49,15 @@ const Favourites = ({ navigation }) => {
         const index = jokes.value.findIndex((joke)=> joke.id === id)
         setIndex(index)
     }
-
-    const deleteJoke = (id) => {
-        remove(id)
-    }
     
     var swipeoutBtns = [
         {
           text: <Feather name="trash-2" size={28} color="black" />,
           backgroundColor: '#ff0000',
-          onPress: () => { remove(jokes.value[index].id) }
-          
+          onPress: () => {remove(jokes.value[index].id) }
         }
       ]
+
 
     return (
             <FlatList 
@@ -63,7 +65,7 @@ const Favourites = ({ navigation }) => {
             data={favourites}
             renderItem={renderCell}
             keyExtractor={(item)=> item.toString()}
-            />  
+            /> 
     )
 }
 export default Favourites
