@@ -2,9 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { SafeAreaView, StyleSheet} from 'react-native';
 import Chucknorris from './src/ChuckNorris';
@@ -13,25 +12,46 @@ import Favourites from './src/Favourites';
 import { JokeProvider } from './src/utils/JokeContext';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
+import { AppearanceProvider } from 'react-native-appearance';
+import { ThemeProvider } from './src/utils/ThemeContext';
 
-const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 
-const App = () => (
+const HomeStack = createStackNavigator();
 
-  <NavigationContainer>
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={Chucknorris} />
+      <HomeStack.Screen name="Favourites" component={Favourites} />
+    </HomeStack.Navigator>
+  );
+}
+
+const FavouritesStack = createStackNavigator();
+
+function FavouritesStackScreen() {
+  return (
+    <FavouritesStack.Navigator>
+      <FavouritesStack.Screen name="Favourites" component={Favourites} />
+    </FavouritesStack.Navigator>
+  );
+}
+
+const App = () => (
+    <NavigationContainer>
+    <AppearanceProvider>
+
+    <ThemeProvider>
+    <JokeProvider>
+    <FavouritesProvider>
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      
-      <JokeProvider>
-      <FavouritesProvider>
-      <Switch/>
         <Tab.Navigator>
           <Tab.Screen 
             name="ChuckNorrisScreen" 
-            component={Chucknorris} 
+            component={HomeStackScreen} 
             options={{
               title: 'Home',
               tabBarIcon: ({focused}) => (
@@ -44,7 +64,7 @@ const App = () => (
           />
           <Tab.Screen 
           name="Favourites" 
-          component={Favourites}
+          component={FavouritesStackScreen}
           options={{
             title: 'Favourites',
             tabBarIcon: ({focused}) => (
@@ -56,10 +76,12 @@ const App = () => (
           }}
           />
         </Tab.Navigator>
-      </FavouritesProvider>
-      </JokeProvider>
-
     </SafeAreaView>
+
+    </FavouritesProvider>
+    </JokeProvider>
+    </ThemeProvider>
+    </AppearanceProvider>
     </NavigationContainer>
     )
 

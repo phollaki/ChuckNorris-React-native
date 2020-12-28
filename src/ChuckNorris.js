@@ -29,6 +29,7 @@ const Chucknorris = ({ navigation }) => {
 
 
     return (
+
     <View style={styles.container}>
         
         <Image 
@@ -44,7 +45,7 @@ const Chucknorris = ({ navigation }) => {
         )}
         </View>
         <Button title="Give me a Joke!" color="red" onPress={generate}/>
-    </View>
+    </View>    
     )
 }
 

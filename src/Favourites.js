@@ -1,9 +1,11 @@
 import React from 'react'
-import {FlatList, Text, TouchableHighlight, StyleSheet} from 'react-native'
+import {FlatList, Text, TouchableHighlight, StyleSheet, View, StatusBar} from 'react-native'
 import Swipeout from 'react-native-swipeout'
 import { useFavourites } from './hooks/useFavourites'
 import { useJokes } from './hooks/useJokes'
 import { Feather } from '@expo/vector-icons'; 
+import { useTheme } from './utils/ThemeContext'
+import { colors } from 'react-native-elements'
 
 
 const Favourites = ({ navigation }) => {
@@ -41,12 +43,14 @@ const Favourites = ({ navigation }) => {
       ]
 
     return (
+        <View>
             <FlatList 
             style={{width: '100%'}}
             data={favourites}
             renderItem={renderCell}
             keyExtractor={(item)=> item.toString()}
             /> 
+        </View>    
     )
     
 }
@@ -57,6 +61,7 @@ const styles = StyleSheet.create({
         borderTopWidth:1,
         borderBottomWidth: 1,
         justifyContent: 'center',
+
     },
     cardText: {
         fontSize: 17,
