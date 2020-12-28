@@ -4,7 +4,7 @@ export const JokeContext = createContext()
 
 export const JokeProvider = (props) => {
     const [jokes, setJokes] = useState([])
-    const [index, setIndex] = useState(0)    
+    const [index, setIndex] = useState(2)    
 
     const load = async () => {
         const response = await fetch(

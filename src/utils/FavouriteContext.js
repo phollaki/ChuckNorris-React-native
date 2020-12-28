@@ -16,5 +16,5 @@ export const FavouritesProvider = (props) => {
     }
 
     return <FavouritesContext.Provider 
-    value={{favourites, add, remove}} {...props} />
+    value={{favourites, setFavourites, add, remove}} {...props} />
 }

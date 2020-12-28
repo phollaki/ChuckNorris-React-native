@@ -11,8 +11,8 @@ const Chucknorris = ({ navigation }) => {
 
     if(jokes.length <= 0) {
         return (
-            <View style={{ flex:1, justifyContent: 'center'}}>
-                <ActivityIndicator color='black'/>
+            <View style={styles.activityIndicator}>
+                <ActivityIndicator/>
             </View>
         )
     }
@@ -27,12 +27,13 @@ const Chucknorris = ({ navigation }) => {
         setIndex(Math.floor(Math.random()* Math.floor(573)))
     }
 
+
     return (
     <View style={styles.container}>
+        
         <Image 
         source={{ uri: 'http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG15.png',}} 
-        style={{ width: 300, height: 300}}
-        resizeMode = 'contain'/>
+        style={styles.imageStyle}/>
 
         <Text style={styles.textStyle}>{jokes.value[index].joke}</Text>
         <View>
@@ -43,29 +44,34 @@ const Chucknorris = ({ navigation }) => {
         )}
         </View>
         <Button title="Give me a Joke!" color="red" onPress={generate}/>
-        <Button title="Favourites" onPress={()=> navigation.navigate('Favourites')} />
     </View>
     )
 }
 
 const styles = StyleSheet.create({
+    activityIndicator: {
+        color: 'black',
+        flex: 1,
+        justifyContent: 'center',
+    },
+    imageStyle: {
+        width: 300,
+        height: 300,
+        resizeMode: 'contain',
+    },
     textStyle: {
         fontWeight: 'bold',
-        color: 'yellow',
         textAlign: 'center',
+        fontSize: 17,
         width: 350,
+        padding: 5,
     },
     container: {
         padding: 50,
         flex: 1,
-        backgroundColor: "black",
         alignItems: 'center',
         justifyContent:'center',
-        color:'yellow',
       },
-    text:{
-        color:'yellow',
-    }
 })
 export default Chucknorris
 
