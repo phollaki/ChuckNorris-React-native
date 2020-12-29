@@ -4,7 +4,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useFavourites } from './hooks/useFavourites';
 import { useJokes } from './hooks/useJokes';
 
-
 const Chucknorris = ({ navigation }) => {
     const {favourites, add, remove} = useFavourites()
     const {jokes, index, setIndex} = useJokes()

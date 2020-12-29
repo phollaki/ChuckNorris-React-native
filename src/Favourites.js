@@ -1,27 +1,24 @@
 import React from 'react'
-import {FlatList, Text, TouchableHighlight, StyleSheet, View, StatusBar} from 'react-native'
+import {FlatList, Text, TouchableHighlight, StyleSheet, View, StatusBar, Button} from 'react-native'
 import Swipeout from 'react-native-swipeout'
-import { useFavourites } from './hooks/useFavourites'
-import { useJokes } from './hooks/useJokes'
+import { useFavourites } from './hooks/useFavourites';
+import { useJokes } from './hooks/useJokes';
 import { Feather } from '@expo/vector-icons'; 
-import { useTheme } from './utils/ThemeContext'
-import { colors } from 'react-native-elements'
+import { Ionicons } from '@expo/vector-icons';
+
 
 
 const Favourites = ({ navigation }) => {
     const {jokes, index, setIndex} = useJokes()
-    const {favourites,  remove} = useFavourites()
+    const {favourites, remove} = useFavourites()
 
     const renderCell = ({item}) => (
-        <Swipeout
-        right = {
-            swipeoutBtns
-            }
-        autoClose backgroundColor = 'transparent'>
         <TouchableHighlight key={item} underlayColor="grey" onPress={ () => getJoke(item) } style = {styles.cardStyle}>
+            <View>
             <Text style={styles.cardText}>{getJokeForID(item)}</Text>
+            <Ionicons name="heart-sharp" size={40} color="red" onPress={() => unfavourite (item)} />
+            </View>
         </TouchableHighlight>
-        </Swipeout>
     )
     
     const getJokeForID = id => {
@@ -34,13 +31,12 @@ const Favourites = ({ navigation }) => {
         setIndex(index)
     }
     
-    var swipeoutBtns = [
-        {
-          text: <Feather name="trash-2" size={28} color="black" />,
-          backgroundColor: '#ff0000',
-          onPress: () => {remove(jokes.value[index].id) },
-        }
-      ]
+    const unfavourite = (id) => {
+        const index = jokes.value.findIndex((joke)=> joke.id === id)
+        setIndex(index)
+        remove(id)
+    }
+
 
     return (
         <View>
