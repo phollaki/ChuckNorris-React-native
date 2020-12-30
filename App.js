@@ -13,7 +13,6 @@ import { JokeProvider } from './src/utils/JokeContext';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import { AppearanceProvider } from 'react-native-appearance';
-import { ThemeProvider } from './src/utils/ThemeContext';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,9 +40,7 @@ function FavouritesStackScreen() {
 
 const App = () => (
     <NavigationContainer>
-    <AppearanceProvider>
 
-    <ThemeProvider>
     <JokeProvider>
     <FavouritesProvider>
     <SafeAreaView style={styles.container}>
@@ -80,8 +77,6 @@ const App = () => (
 
     </FavouritesProvider>
     </JokeProvider>
-    </ThemeProvider>
-    </AppearanceProvider>
     </NavigationContainer>
     )
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import {StyleSheet,View, Text, ActivityIndicator, Image, Button} from 'react-native'
+import React, { useState } from 'react'
+import {TextInput,StyleSheet,View, Text, ActivityIndicator, Image, Button} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useFavourites } from './hooks/useFavourites';
 import { useJokes } from './hooks/useJokes';
@@ -7,6 +7,7 @@ import { useJokes } from './hooks/useJokes';
 const Chucknorris = ({ navigation }) => {
     const {favourites, add, remove} = useFavourites()
     const {jokes, index, setIndex} = useJokes()
+
 
     if(jokes.length <= 0) {
         return (
@@ -25,7 +26,6 @@ const Chucknorris = ({ navigation }) => {
     const generate = () => {
         setIndex(Math.floor(Math.random()* Math.floor(573)))
     }
-
 
     return (
 

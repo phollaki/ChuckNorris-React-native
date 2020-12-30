@@ -1,21 +1,22 @@
 import React, { createContext, useEffect, useState } from "react";
+import useStore from "../hooks/useStore";
 
 
 export const FavouritesContext = createContext()
 
 export const FavouritesProvider = (props) => {
-    const [favourites, setFavourites] = useState([])
-
+    const { values, setValues, deleteValu} = useStore('favourites', [])
+   
     const add = (id) => {
-        if(!favourites.includes(id)){
-            setFavourites([...favourites, id])
+        if(!values.includes(id)){
+            setValues([...values, id])
         }
     }
+
     const remove = (id) => {
-        const filtered = favourites.filter((favourite) => favourite !== id)
-        setFavourites(filtered)
+        deleteValu(id)
     }
 
     return <FavouritesContext.Provider 
-    value={{favourites, setFavourites, add, remove}} {...props} />
+    value={{favourites: values, add, remove}} {...props} />
 }
