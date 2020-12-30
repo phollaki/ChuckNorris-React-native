@@ -7,7 +7,7 @@ import { useJokes } from './hooks/useJokes';
 const Chucknorris = ({ navigation }) => {
     const {favourites, add, remove} = useFavourites()
     const {jokes, index, setIndex} = useJokes()
-
+    const [url, setUrl] = useState('http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG15.png')
 
     if(jokes.length <= 0) {
         return (
@@ -26,13 +26,22 @@ const Chucknorris = ({ navigation }) => {
     const generate = () => {
         setIndex(Math.floor(Math.random()* Math.floor(573)))
     }
+    const changePhoto = () => {
+        if(url === 'http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG15.png'){
+            setUrl('https://pngimg.com/uploads/chuck_norris/chuck_norris_PNG2.png')
+        }
+        if(url === 'https://pngimg.com/uploads/chuck_norris/chuck_norris_PNG2.png'){
+        setUrl('http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG15.png')
+    }
+    }
 
+   
     return (
 
     <View style={styles.container}>
-        
+        <Button title="Change photo!" onPress={changePhoto}/>
         <Image 
-        source={{ uri: 'http://pngimg.com/uploads/chuck_norris/chuck_norris_PNG15.png',}} 
+        source={{uri: url}} 
         style={styles.imageStyle}/>
 
         <Text style={styles.textStyle}>{jokes.value[index].joke}</Text>
