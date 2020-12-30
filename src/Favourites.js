@@ -1,16 +1,18 @@
-import React from 'react'
-import {FlatList, Text, TouchableHighlight, StyleSheet, View, StatusBar, Button} from 'react-native'
-import Swipeout from 'react-native-swipeout'
+import React, { useState } from 'react'
+import {FlatList, Text, TouchableHighlight, StyleSheet, View, StatusBar, Button, SafeAreaView} from 'react-native'
 import { useFavourites } from './hooks/useFavourites';
 import { useJokes } from './hooks/useJokes';
 import { Feather } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons';
+import { SearchBar } from 'react-native-elements';
+import { TextInput } from 'react-native-gesture-handler';
 
 
 
 const Favourites = ({ navigation }) => {
     const {jokes, index, setIndex} = useJokes()
     const {favourites, remove} = useFavourites()
+    const [searchState, setSearchState] = useState('')
 
     const renderCell = ({item}) => (
         <TouchableHighlight key={item} underlayColor="grey" onPress={ () => getJoke(item) } style = {styles.cardStyle}>
@@ -37,16 +39,35 @@ const Favourites = ({ navigation }) => {
         remove(id)
     }
 
+    const handleText = (text) => {
+        setSearchState(text)
+    }
 
+    const searchedFav = (items) => {
+        const containText = jokes.value.filter((joke) => items.includes(joke.id))
+        const selected = []
+        for (item of containText) {
+            if(item.joke.includes(searchState.toLowerCase())){
+                selected.push(item.id)
+            }
+        }
+            return selected
+        }
+    
     return (
         <View>
+            <SearchBar placeholder="Type Here..." 
+            round 
+            lightTheme
+            onChangeText={handleText} 
+            value={searchState}/>
             <FlatList 
             style={{width: '100%'}}
-            data={favourites}
+            data={searchedFav(favourites)}
             renderItem={renderCell}
             keyExtractor={(item)=> item.toString()}
             /> 
-        </View>    
+        </View>
     )
     
 }
@@ -57,11 +78,14 @@ const styles = StyleSheet.create({
         borderTopWidth:1,
         borderBottomWidth: 1,
         justifyContent: 'center',
-
+        backgroundColor: 'black',
+        borderBottomColor: 'gray',
+        borderTopColor: 'gray',
     },
     cardText: {
         fontSize: 17,
         fontWeight: 'bold',
+        color: '#2196F3',
     },
 });
 export default Favourites

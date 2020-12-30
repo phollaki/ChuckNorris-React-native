@@ -22,7 +22,14 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={Chucknorris} />
+      <HomeStack.Screen name="Home" component={Chucknorris} options={{
+        title: 'Chuck Norris Jokes',
+        headerTintColor: '#2196F3',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            alignSelf: 'center',
+        },
+        }} />
       <HomeStack.Screen name="Favourites" component={Favourites} />
     </HomeStack.Navigator>
   );
@@ -33,7 +40,14 @@ const FavouritesStack = createStackNavigator();
 function FavouritesStackScreen() {
   return (
     <FavouritesStack.Navigator>
-      <FavouritesStack.Screen name="Favourites" component={Favourites} />
+      <FavouritesStack.Screen name="Favourites" component={Favourites} 
+      options={{
+        title: 'Favourites',
+        headerTintColor: '#2196F3',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+        },
+        }} />
     </FavouritesStack.Navigator>
   );
 }

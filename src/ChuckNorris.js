@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     textStyle: {
+        color: '#2196F3',
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 17,
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
+        backgroundColor: 'black'
       },
 })
 export default Chucknorris
